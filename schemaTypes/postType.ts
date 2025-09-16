@@ -11,6 +11,12 @@ export const postType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'subtitle',
+      type: 'string',
+      title: 'Subtitle',
+      description: 'Optional subtitle for the post',
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
       options: {source: 'title'},
@@ -82,4 +88,4 @@ export const postType = defineType({
       ],
     }),
   ],
-});
+})
