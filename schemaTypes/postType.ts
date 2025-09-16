@@ -23,13 +23,63 @@ export const postType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'image',
+      name: 'mainImage',
+      title: 'Main image', // <-- Add this line
       type: 'image',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        defineField({
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
+          description: 'Important for SEO and accessibility.',
+          validation: (rule) => rule.required(),
+        }),
+      ],
     }),
     defineField({
       name: 'body',
       type: 'array',
-      of: [{type: 'block'}],
+      of: [
+        {type: 'block'},
+        {
+          type: 'image',
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative text',
+              description: 'Important for SEO and accessibility.',
+              options: {
+                isHighlighted: true,
+              },
+            },
+          ],
+        },
+      ],
+    }),
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'metaTitle',
+          title: 'Meta Title',
+          type: 'string',
+          description: 'The title that appears in search results. Max 65 characters.',
+          validation: (rule) => rule.max(65),
+        }),
+        defineField({
+          name: 'metaDescription',
+          title: 'Meta Description',
+          type: 'text',
+          description: 'The description that appears in search results. Max 155 characters.',
+          validation: (rule) => rule.max(155),
+        }),
+      ],
     }),
   ],
-})
+});
