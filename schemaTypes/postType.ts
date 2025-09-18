@@ -64,6 +64,7 @@ export const postType = defineType({
             },
           ],
         },
+        {type: 'youtube'},
       ],
     }),
     defineField({
